@@ -4,7 +4,7 @@ import "./App.css";
 // ── Personalize here ─────────────────────────────────────────────
 const FRIEND_NAME = "Mae"; // ← swap in her actual name
 const PHOTO_SRC = "/photo.png"; // ← path inside your public/ folder
-const MUSIC_SRC = "/bgm.mpeg"; // ← path inside your public/ folder
+const MUSIC_SRC = "/bgm1.mpeg"; // ← path inside your public/ folder
 const MUSIC_VOLUME = 0.25; // ← keep it subtle, 0 to 1
 // ─────────────────────────────────────────────────────────────────
 
