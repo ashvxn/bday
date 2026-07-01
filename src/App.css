@@ -32,10 +32,17 @@ body,
   align-items: center;
   justify-content: center;
   padding: clamp(12px, 3vh, 32px) 20px;
-  overflow: hidden;
+  overflow-y: auto; /* safety net only — shouldn't be needed, but never clips text */
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* old Edge */
   background: var(--black);
   font-family: "Cormorant Garamond", serif;
   color: var(--cream);
+}
+
+.stage::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
 /* Comic poster, dimmed and tinted so it reads as texture, not noise */
@@ -192,8 +199,6 @@ body,
   z-index: 1;
   width: 100%;
   max-width: 560px;
-  max-height: 100%;
-  overflow: hidden;
   text-align: center;
   padding: clamp(20px, 4vh, 44px) clamp(24px, 5vw, 40px) clamp(18px, 3.5vh, 36px);
   border: 1px solid rgba(201, 162, 39, 0.35);
@@ -398,9 +403,9 @@ body,
 }
 
 .signature {
-  margin: clamp(12px, 2.2vh, 26px) 0 0;
+  margin: clamp(10px, 1.8vh, 22px) 0 0;
   font-family: "Parisienne", cursive;
-  font-size: clamp(20px, 3vh, 26px);
+  font-size: clamp(18px, 2.6vh, 24px);
   color: var(--gold-light);
   text-shadow: 0 0 18px rgba(255, 191, 107, 0.3);
 }
