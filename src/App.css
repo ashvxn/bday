@@ -10,24 +10,28 @@
   --glow: #ffbf6b;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 * {
   box-sizing: border-box;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
 .stage {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh; /* actual visible viewport on mobile, avoids URL-bar scroll */
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px 20px;
+  padding: clamp(12px, 3vh, 32px) 20px;
   overflow: hidden;
   background: var(--black);
   font-family: "Cormorant Garamond", serif;
@@ -42,7 +46,7 @@ body {
   background-image: url("/poster.jpeg");
   background-size: cover;
   background-position: center;
-  opacity: 4.16;
+  opacity: 0.46;
   filter: saturate(0.9) contrast(1.05);
   z-index: 0;
 }
@@ -188,8 +192,10 @@ body {
   z-index: 1;
   width: 100%;
   max-width: 560px;
+  max-height: 100%;
+  overflow: hidden;
   text-align: center;
-  padding: 56px 40px 44px;
+  padding: clamp(20px, 4vh, 44px) clamp(24px, 5vw, 40px) clamp(18px, 3.5vh, 36px);
   border: 1px solid rgba(201, 162, 39, 0.35);
   border-radius: 4px;
   background: linear-gradient(180deg, rgba(30, 12, 13, 0.7), rgba(20, 9, 10, 0.85));
@@ -212,13 +218,13 @@ body {
 }
 
 .eyebrow {
-  margin: 0 0 10px;
+  margin: 0 0 clamp(6px, 1.5vh, 10px);
   font-family: "Cormorant Garamond", serif;
   font-style: italic;
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--gold-light);
   opacity: 0.85;
 }
@@ -227,7 +233,7 @@ body {
   margin: 0;
   font-family: "Playfair Display", serif;
   font-weight: 700;
-  font-size: clamp(34px, 6vw, 50px);
+  font-size: clamp(28px, 5.5vh, 46px);
   line-height: 1.05;
   letter-spacing: 0.01em;
   color: var(--cream);
@@ -239,8 +245,8 @@ body {
 }
 
 .subtitle {
-  margin: 10px 0 34px;
-  font-size: 19px;
+  margin: clamp(6px, 1.2vh, 10px) 0 clamp(16px, 3vh, 30px);
+  font-size: clamp(15px, 2.2vh, 19px);
   font-style: italic;
   color: rgba(244, 233, 214, 0.75);
 }
@@ -248,9 +254,9 @@ body {
 /* ---------- Medallion (signature element) ---------- */
 .medallion {
   position: relative;
-  width: clamp(180px, 40vw, 220px);
-  height: clamp(180px, 40vw, 220px);
-  margin: 0 auto 30px;
+  width: clamp(120px, 24vh, 200px);
+  height: clamp(120px, 24vh, 200px);
+  margin: 0 auto clamp(16px, 3vh, 30px);
 }
 
 .medallion-ring {
@@ -321,7 +327,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  margin: 8px auto 26px;
+  margin: 4px auto clamp(14px, 2.8vh, 26px);
   max-width: 260px;
 }
 
@@ -336,11 +342,53 @@ body {
   font-size: 13px;
 }
 
+/* ---------- Read more ---------- */
+.read-more {
+  appearance: none;
+  border: 1px solid rgba(201, 162, 39, 0.55);
+  background: transparent;
+  color: var(--gold-light);
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  padding: 9px 26px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.read-more:hover {
+  border-color: var(--gold-light);
+  background: rgba(201, 162, 39, 0.12);
+  color: var(--cream);
+}
+
+.read-more:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
+.message-block {
+  animation: reveal-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ---------- Copy ---------- */
 .message {
-  margin: 0 0 16px;
-  font-size: 19px;
-  line-height: 1.6;
+  margin: 0 0 clamp(8px, 1.6vh, 16px);
+  font-size: clamp(15px, 2.2vh, 19px);
+  line-height: 1.5;
   color: rgba(244, 233, 214, 0.92);
 }
 
@@ -350,9 +398,9 @@ body {
 }
 
 .signature {
-  margin: 26px 0 0;
+  margin: clamp(12px, 2.2vh, 26px) 0 0;
   font-family: "Parisienne", cursive;
-  font-size: 26px;
+  font-size: clamp(20px, 3vh, 26px);
   color: var(--gold-light);
   text-shadow: 0 0 18px rgba(255, 191, 107, 0.3);
 }
@@ -361,13 +409,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .card,
   .sparkle,
-  .ring-outer {
+  .ring-outer,
+  .message-block {
     animation: none !important;
-  }
-}
-
-@media (max-width: 420px) {
-  .card {
-    padding: 44px 24px 34px;
   }
 }

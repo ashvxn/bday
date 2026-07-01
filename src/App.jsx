@@ -4,7 +4,7 @@ import "./App.css";
 // ── Personalize here ─────────────────────────────────────────────
 const FRIEND_NAME = "Mae"; // ← swap in her actual name
 const PHOTO_SRC = "/photo.png"; // ← path inside your public/ folder
-const MUSIC_SRC = "/bgm1.mpeg"; // ← path inside your public/ folder
+const MUSIC_SRC = "/bgm.mpeg"; // ← path inside your public/ folder
 const MUSIC_VOLUME = 0.25; // ← keep it subtle, 0 to 1
 // ─────────────────────────────────────────────────────────────────
 
@@ -39,6 +39,7 @@ function Sparkles() {
 export default function App() {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -111,7 +112,7 @@ export default function App() {
       </button>
 
       <main className="card">
-        <p className="eyebrow">A tribute worthy of a Stark</p>
+        <p className="eyebrow">Stark Industries</p>
 
         <h1 className="headline">
           Happy Birthday<span className="headline-accent">.</span>
@@ -138,18 +139,31 @@ export default function App() {
           <span className="divider-line" />
         </div>
 
-        <p className="message">
-          Every genius needs an origin story, and somewhere in mine, you're
-          the reason the lights stay on. Here's to another year of brilliance,
-          grace, and the kind of glow no reactor could ever match.
-        </p>
+        {!expanded && (
+          <button
+            type="button"
+            className="read-more"
+            onClick={() => setExpanded(true)}
+          >
+            Read more
+          </button>
+        )}
 
-        <p className="message message--soft">
-          May this year hand you exactly the plot twists you'd choose for
-          yourself — and a few dazzling ones you wouldn't have dared to write.
-        </p>
+        {expanded && (
+          <div className="message-block">
+            <p className="message">
+              Every one has their own arc reactor some filled with palladium urs filled with kindness and love , thnx for being a good friend throughout da year, have a blast of a day Mae 🫶🏾
+            </p>
 
-        <p className="signature">— with love, admiration, and zero vibranium</p>
+            <p className="message message--soft">
+             See you around, kid.
+            </p>
+
+            <p className="signature">
+              — with love, admiration, and zero vibranium
+            </p>
+          </div>
+        )}
       </main>
     </div>
   );
