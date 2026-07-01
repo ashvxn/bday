@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 // ── Personalize here ─────────────────────────────────────────────
-const FRIEND_NAME = "Mae"; // ← swap in her actual name
-const PHOTO_SRC = "/photo.jpeg"; // ← path inside your public/ folder
-const MUSIC_SRC = "/bgm.mpeg"; // ← path inside your public/ folder
+const FRIEND_NAME = "Her Name"; // ← swap in her actual name
+const PHOTO_SRC = "/photo.jpg"; // ← path inside your public/ folder
+const MUSIC_SRC = "/bgm.mp3"; // ← path inside your public/ folder
 const MUSIC_VOLUME = 0.25; // ← keep it subtle, 0 to 1
 // ─────────────────────────────────────────────────────────────────
 
@@ -51,24 +51,27 @@ export default function App() {
     audio.play().catch(() => {});
 
     // On her first interaction anywhere on the page, unmute and ensure it's playing.
+    // Only click/keydown count as valid gestures for audio on most mobile browsers —
+    // touchstart is unreliable and firing it too early can eat the interaction.
     const unmuteOnInteraction = () => {
       audio.muted = false;
       audio
         .play()
-        .then(() => setIsPlaying(true))
-        .catch(() => setIsPlaying(false));
-      window.removeEventListener("click", unmuteOnInteraction);
-      window.removeEventListener("touchstart", unmuteOnInteraction);
-      window.removeEventListener("keydown", unmuteOnInteraction);
+        .then(() => {
+          setIsPlaying(true);
+          window.removeEventListener("click", unmuteOnInteraction);
+          window.removeEventListener("keydown", unmuteOnInteraction);
+        })
+        .catch(() => {
+          setIsPlaying(false); // keep listening — next tap will retry
+        });
     };
 
     window.addEventListener("click", unmuteOnInteraction);
-    window.addEventListener("touchstart", unmuteOnInteraction);
     window.addEventListener("keydown", unmuteOnInteraction);
 
     return () => {
       window.removeEventListener("click", unmuteOnInteraction);
-      window.removeEventListener("touchstart", unmuteOnInteraction);
       window.removeEventListener("keydown", unmuteOnInteraction);
     };
   }, []);
@@ -91,7 +94,7 @@ export default function App() {
     <div className="stage">
       <Sparkles />
 
-      <audio ref={audioRef} src={MUSIC_SRC} loop preload="none" />
+      <audio ref={audioRef} src={MUSIC_SRC} loop preload="auto" />
 
       <button
         type="button"
