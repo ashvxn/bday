@@ -115,7 +115,7 @@ export default function App() {
         <p className="eyebrow">Stark Industries</p>
 
         <h1 className="headline">
-          Happy Birthday<span className="headline-accent">.</span>
+         𝐇𝐀𝐏𝐏𝐘 𝐁𝐈𝐑𝐓𝐇𝐃𝐀𝐘<span className="headline-accent"></span>
         </h1>
 
         <p className="subtitle">to the one and only, {FRIEND_NAME}</p>
@@ -152,8 +152,8 @@ export default function App() {
         {expanded && (
           <div className="message-block">
             <p className="message">
-              Every one has their own arc reactor some filled with palladium urs filled with kindness and love , thnx for being a good friend throughout da year, have a blast of a day Mae 🫶🏾
             </p>
+Every one has their own arc reactor some filled with palladium urs filled with kindness and love , thnx for being a good friend throughout da year, have a blast of a day Mae 🫶🏾 u r inevitable 😉✨
 
             <p className="message message--soft">
              See you around, kid.
