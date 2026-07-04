@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://wa.me/918138010307?text=free%20hostel%20campaign",
+      "permanent": true
+    }
+  ]
+}
